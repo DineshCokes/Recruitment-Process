@@ -63,3 +63,9 @@ let mydetails=[
         mydetails[place]=data
 
     }
+    export const wash=(index)=>{
+        mydetails=mydetails.filter((d,i)=>{
+            return i!==index
+        })
+        return mydetails;
+    }

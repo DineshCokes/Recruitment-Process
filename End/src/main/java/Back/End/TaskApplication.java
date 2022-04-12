@@ -1,13 +1,13 @@
-package Dinesh.demo;
+package Back.End;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class Task1Application {
+public class TaskApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(Task1Application.class, args);
+		SpringApplication.run(TaskApplication.class, args);
 	}
 
 }

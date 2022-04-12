@@ -2,9 +2,10 @@ import React, { useEffect, useState } from "react";
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css"
 import "../node_modules/bootstrap-icons/font/bootstrap-icons.css"
 import { Loan } from "./Tabulation";
-import { list,fetchExact} from "./Detail";
+import { list,fetchExact, wash} from "./Detail";
 import { Page } from "./Page";
 import { Update } from "./Update";
+import { erase, gather } from "./Connect";
 export const Table=()=>
 {
     const[tmpArray,setTmpArray]=useState([])
@@ -13,9 +14,17 @@ export const Table=()=>
     const[updateview,setUpdateView]=useState(false)
     const[pos,setPos]=useState(0)
     const[obj,setObj]=useState({})
-    const hello=()=>
+    const hello=async()=>
     {
-        setTmpArray(list())
+        const t=await gather();
+        //setTmpArray(list())
+        setTmpArray(t.data)
+    }
+    const toErase=async(value)=>
+    {
+        const dc=await erase(value)
+        alert(dc.data)
+        window.location.assign("/")
     }
     useEffect(()=>
     {
@@ -31,6 +40,7 @@ export const Table=()=>
                 ()=>
                 {
                     setCreateView(false)
+                    window.location.assign("/")
                 }
             }>
                 <i className="bi bi-skip-backward-btn-fill"></i> Back
@@ -40,10 +50,11 @@ export const Table=()=>
             :
             (updateview)?
             <>
-            <Update who={pos} mention={obj}/>
+            <Update mention={obj}/>
                     <button className="btn btn-outline-secondary" onClick={
                         ()=>{
                             setUpdateView(false)
+                            window.location.assign("/")
                         }
                     }>
                         <i className="bi bi-skip-backward-btn-fill"></i> Back
@@ -97,7 +108,8 @@ export const Table=()=>
                                 <button className="btn btn-outline-primary" onClick={()=>
                                 {
                                     setReadView(true)
-                                    setPos(index)
+                                    //setPos(index)
+                                    setPos(ele.resId)
                                 }}>
                                     <i class="bi bi-chat"></i>
                                 </button>
@@ -115,16 +127,22 @@ export const Table=()=>
                             <button className="btn btn-outline-warning rounded-circle"
                                                 onClick={()=>{
                                                     setUpdateView(true)
-                                                    setPos(index)
-                                                    const y=fetchExact(ele.resText)
-                                                    setObj(y)
+                                                    //setPos(index)
+                                                    //const y=fetchExact(ele.resText)
+                                                    setObj(ele)
                                                 }}>
                                                     Edit <i className="bi bi-pencil-fill"></i>
                                                 </button>
 
                                                 </td>
                                           <td>
-                                                <button className="btn btn-outline-danger rounded-circle">
+                                                <button className="btn btn-outline-danger rounded-circle"
+                                                onClick={()=>{
+                                                    //setTmpArray(wash(index))
+                                                    toErase(ele.resId)
+                                                }}>
+                                                 
+
                                                     Delete <i className="bi bi-trash-fill"></i>
                                                 </button>
                                             </td>

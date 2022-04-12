@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Updateone } from "./Connect";
 import { alter } from "./Detail";
 
 export const Update=(rock)=>{
@@ -7,6 +8,7 @@ export const Update=(rock)=>{
     const[pos,setPos]=useState(rock.who)
 
     const[person,setPerson]=useState({
+        "resId":rock.mention.resId,
         "resText":rock.mention.resText,
         "resNum":rock.mention.resNum,
         "resCibil":rock.mention.resCibil,
@@ -16,10 +18,11 @@ export const Update=(rock)=>{
         "resMail":rock.mention.resMail,
         "resAdd":rock.mention.resAdd,
     })
-    const vijay=()=>
+    const vijay=async()=>
     {
-        alter(pos,person)
-        
+        //alter(pos,person)
+        const c=await Updateone(person)
+        alert(c.data)
     }
     const ajith=()=>
     {

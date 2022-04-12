@@ -1,4 +1,5 @@
 import React, { useEffect,useState} from "react";
+import { reachOne } from "./Connect";
 import { read } from "./Detail";
 export const Page=(trisha)=>
 {
@@ -18,9 +19,11 @@ export const Page=(trisha)=>
     {
         callReading()
     })
-    const callReading=()=>
+    const callReading=async()=>
     {
-        setEmployee(read(trisha.who))
+        //setEmployee(read(trisha.who))
+        const a=await reachOne(trisha.who)
+        setEmployee(a.data)
     }
     return(
         <>

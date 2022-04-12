@@ -1,10 +1,10 @@
-package Dinesh.demo;
+package Back.End;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class Task1ApplicationTests {
+class TaskApplicationTests {
 
 	@Test
 	void contextLoads() {

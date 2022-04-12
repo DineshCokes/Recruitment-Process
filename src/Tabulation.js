@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css"
+import { join } from "./Connect";
+
 import {create, list} from "./Detail"
 export const Loan=()=>
 {
@@ -29,9 +31,12 @@ export const Loan=()=>
             }
         )
     }
-    const vijay=()=>
+    const vijay=async()=>
     {
-        create(person)
+        //create(person)
+       const yet=await join(person)
+        alert(yet.data)
+        //alert("hii")
     }
     const ajith=()=>
     {
